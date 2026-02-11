@@ -1,0 +1,133 @@
+{
+  "manifest_version": 3,
+  "name": "ParcelPulse",
+  "description": "Traccia i tuoi pacchi Amazon in tempo reale con mappa GPS - Il battito del tuo pacco",
+  "version": "1.5.2",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "cookies",
+    "storage",
+    "activeTab",
+    "scripting",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://www.amazon.com/*",
+    "https://www.amazon.co.uk/*",
+    "https://www.amazon.ca/*",
+    "https://www.amazon.de/*",
+    "https://www.amazon.es/*",
+    "https://www.amazon.fr/*",
+    "https://www.amazon.it/*",
+    "https://www.amazon.co.jp/*",
+    "https://www.amazon.in/*",
+    "https://www.amazon.com.sg/*",
+    "https://www.amazon.com.au/*",
+    "https://www.amazon.com.mx/*",
+    "https://www.amazon.com.br/*",
+    "https://www.amazon.nl/*",
+    "https://www.amazon.pl/*",
+    "https://www.amazon.se/*",
+    "https://www.amazon.ae/*",
+    "https://www.amazon.sa/*",
+    "https://www.amazon.com.tr/*",
+    "https://www.amazon.com.be/*",
+    "https://www.amazon.eg/*",
+    "https://www.amazon.co/*",
+    "https://*.tile.openstreetmap.org/*",
+    "https://router.project-osrm.org/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://*.tile.openstreetmap.org data:;"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.ca/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.es/*",
+        "https://www.amazon.fr/*",
+        "https://www.amazon.it/*",
+        "https://www.amazon.co.jp/*",
+        "https://www.amazon.in/*",
+        "https://www.amazon.com.sg/*",
+        "https://www.amazon.com.au/*",
+        "https://www.amazon.com.mx/*",
+        "https://www.amazon.com.br/*",
+        "https://www.amazon.nl/*",
+        "https://www.amazon.pl/*",
+        "https://www.amazon.se/*",
+        "https://www.amazon.ae/*",
+        "https://www.amazon.sa/*",
+        "https://www.amazon.com.tr/*",
+        "https://www.amazon.com.be/*",
+        "https://www.amazon.eg/*",
+        "https://www.amazon.co/*"
+      ],
+      "js": ["content-amazon.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://parcelpulse.it/*",
+        "https://www.parcelpulse.it/*"
+      ],
+      "js": ["content-webapp.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "pageScript.js",
+        "overlay.html",
+        "overlay.js",
+        "overlay.css",
+        "leaflet/leaflet.js",
+        "leaflet/leaflet.css",
+        "leaflet/images/*",
+        "icons/icon48.png"
+      ],
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.ca/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.es/*",
+        "https://www.amazon.fr/*",
+        "https://www.amazon.it/*",
+        "https://www.amazon.co.jp/*",
+        "https://www.amazon.in/*",
+        "https://www.amazon.com.sg/*",
+        "https://www.amazon.com.au/*",
+        "https://www.amazon.com.mx/*",
+        "https://www.amazon.com.br/*",
+        "https://www.amazon.nl/*",
+        "https://www.amazon.pl/*",
+        "https://www.amazon.se/*",
+        "https://www.amazon.ae/*",
+        "https://www.amazon.sa/*",
+        "https://www.amazon.com.tr/*",
+        "https://www.amazon.com.be/*",
+        "https://www.amazon.eg/*",
+        "https://www.amazon.co/*"
+      ]
+    }
+  ]
+}

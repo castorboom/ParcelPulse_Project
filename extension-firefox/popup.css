@@ -1,0 +1,314 @@
+/* ==========================================
+   ParcelPulse - Popup Styles
+   Cyber Violet Theme
+   ========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 320px;
+  min-height: 200px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #E2E8F0;
+  background: #0A0A1A;
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), transparent);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8B5CF6;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.logo svg {
+  filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.5));
+}
+
+.version {
+  font-size: 10px;
+  color: #64748B;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(100, 116, 139, 0.1);
+}
+
+/* Status Card */
+.status-card {
+  margin: 12px 16px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.12);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot.connected {
+  background: #06B6D4;
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.6);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.dot.disconnected {
+  background: #64748B;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Sessions */
+.sessions-section {
+  padding: 0 16px;
+}
+
+.section-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748B;
+  margin-bottom: 8px;
+}
+
+.sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.session-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(30, 30, 50, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.08);
+  transition: all 0.2s ease;
+}
+
+.session-item:hover {
+  border-color: rgba(139, 92, 246, 0.25);
+  background: rgba(30, 30, 50, 0.9);
+}
+
+.session-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.session-domain {
+  font-size: 12px;
+  font-weight: 600;
+  color: #E2E8F0;
+}
+
+.session-domain .flag {
+  margin-right: 4px;
+}
+
+.session-meta {
+  font-size: 10px;
+  color: #64748B;
+}
+
+.session-meta .token-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #06B6D4;
+}
+
+.session-meta .token-badge::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #06B6D4;
+}
+
+.session-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+  background: rgba(139, 92, 246, 0.15);
+  color: #8B5CF6;
+}
+
+.btn-icon.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
+}
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.empty-icon {
+  color: #334155;
+}
+
+.empty-state p {
+  font-size: 11px;
+  color: #64748B;
+  line-height: 1.5;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-top: 4px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  flex: 1;
+  background: #8B5CF6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #7C3AED;
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.4);
+}
+
+.btn-ghost {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748B;
+  padding: 8px 10px;
+}
+
+.btn-ghost:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+}
+
+/* Footer */
+.footer {
+  padding: 8px 16px 12px;
+  text-align: center;
+}
+
+.disclaimer {
+  font-size: 9px;
+  color: #475569;
+}
+
+/* Share button */
+.share-section {
+  padding: 0 16px 4px;
+}
+
+.btn-share {
+  width: 100%;
+  background: rgba(139, 92, 246, 0.08);
+  color: #8B5CF6;
+  border: 1px dashed rgba(139, 92, 246, 0.25);
+}
+
+.btn-share:hover {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+}
+
+/* Track button */
+.track-btn:hover {
+  background: rgba(6, 182, 212, 0.15) !important;
+}
+
+/* Tracking items */
+.tracking-item {
+  border-color: rgba(6, 182, 212, 0.12);
+}
+
+.tracking-item:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* Scrollbar */
+.sessions-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sessions-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sessions-list::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 2px;
+}

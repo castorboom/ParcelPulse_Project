@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParcelPulse</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="icons/icon48.png" width="20" height="20" alt="ParcelPulse">
+      <span>ParcelPulse</span>
+    </div>
+    <span class="version" id="version">v1.0.0</span>
+  </div>
+
+  <!-- Status -->
+  <div class="status-card" id="statusCard">
+    <div class="status-indicator" id="statusIndicator">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText">Caricamento...</span>
+    </div>
+  </div>
+
+  <!-- Connected domains -->
+  <div class="sessions-section">
+    <div class="section-title">Domini Amazon collegati</div>
+    <div id="sessionsList" class="sessions-list">
+      <div class="empty-state">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <p>Nessun dominio collegato. Visita Amazon per la connessione automatica.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detected tracking IDs -->
+  <div class="sessions-section" id="trackingSection" style="display:none">
+    <div class="section-title">Spedizioni rilevate</div>
+    <div id="trackingList" class="sessions-list"></div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn btn-primary" id="openWebapp">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        <polyline points="15,3 21,3 21,9"/>
+        <line x1="10" y1="14" x2="21" y2="3"/>
+      </svg>
+      Apri ParcelPulse
+    </button>
+    <button class="btn btn-ghost" id="clearAll" title="Cancella tutto">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 6h18"/>
+        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Share -->
+  <div class="share-section">
+    <button class="btn btn-share" id="shareExtension">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3"/>
+        <circle cx="6" cy="12" r="3"/>
+        <circle cx="18" cy="19" r="3"/>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+      </svg>
+      <span>Condividi con i tuoi amici</span>
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span class="disclaimer">I dati rimangono nel tuo browser</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

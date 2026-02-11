@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ParcelPulse Tracker</title>
+  <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <link rel="stylesheet" href="overlay.css" />
+</head>
+<body>
+  <!-- Backdrop (semi-transparent dark, click to close) -->
+  <div class="overlay-backdrop" id="backdrop"></div>
+
+  <!-- Main overlay panel -->
+  <div class="overlay-panel" id="overlayPanel">
+    <!-- Header bar -->
+    <header class="overlay-header">
+      <div class="header-left">
+        <img src="icons/icon48.png" width="20" height="20" alt="" class="logo-icon-img">
+        <span class="logo-text">ParcelPulse</span>
+        <span class="version-badge">v1.5.2</span>
+      </div>
+      <div class="header-center">
+        <div class="refresh-indicator" id="refreshIndicator">
+          <span class="refresh-pulse"></span>
+          <span id="refreshCountdown">Aggiornamento tra 30s</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="btn-icon" id="btnNotifSettings" title="Impostazioni notifiche">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+          </svg>
+        </button>
+        <button class="btn-icon" id="btnRefresh" title="Aggiorna ora">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+            <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+            <path d="M16 16h5v5"/>
+          </svg>
+        </button>
+        <button class="btn-icon btn-close" id="btnClose" title="Chiudi (ESC)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/>
+            <path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content area: map + info panel -->
+    <main class="overlay-content">
+      <!-- Map takes full remaining space -->
+      <div id="map" class="map-container"></div>
+
+      <!-- Info panel (bottom overlay on map) -->
+      <div class="info-panel" id="infoPanel">
+        <!-- Status badge -->
+        <div class="info-status" id="infoStatus">
+          <span class="status-dot"></span>
+          <span class="status-text">Caricamento...</span>
+        </div>
+
+        <!-- Stats row -->
+        <div class="info-stats" id="infoStats">
+          <div class="stat-item" id="statDistance">
+            <svg class="stat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>
+            </svg>
+            <span class="stat-value">--</span>
+            <span class="stat-label">Distanza</span>
+          </div>
+          <div class="stat-item" id="statStops">
+            <svg class="stat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span class="stat-value">--</span>
+            <span class="stat-label">Fermate</span>
+          </div>
+          <div class="stat-item" id="statUpdate">
+            <svg class="stat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+            <span class="stat-value">--</span>
+            <span class="stat-label">Ultimo agg.</span>
+          </div>
+        </div>
+
+        <!-- Tracking IDs (if multiple) -->
+        <div class="info-tracking-ids" id="infoTrackingIds"></div>
+      </div>
+
+      <!-- Notification settings panel -->
+      <div class="notif-panel" id="notifPanel">
+        <div class="notif-panel-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--pp-primary)">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+          </svg>
+          <span class="notif-panel-title">Notifiche</span>
+          <button class="btn-icon notif-panel-close" id="btnNotifClose" title="Chiudi">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+            </svg>
+          </button>
+        </div>
+        <div class="notif-panel-body">
+          <label class="notif-toggle">
+            <input type="checkbox" id="notifStatusChange" checked />
+            <span class="notif-toggle-slider"></span>
+            <div class="notif-toggle-info">
+              <span class="notif-toggle-label">Cambio stato</span>
+              <span class="notif-toggle-desc">Quando lo stato della spedizione cambia (es. "In consegna")</span>
+            </div>
+          </label>
+          <label class="notif-toggle">
+            <input type="checkbox" id="notifDelivered" checked />
+            <span class="notif-toggle-slider"></span>
+            <div class="notif-toggle-info">
+              <span class="notif-toggle-label">Consegnato</span>
+              <span class="notif-toggle-desc">Quando il pacco risulta consegnato</span>
+            </div>
+          </label>
+          <label class="notif-toggle">
+            <input type="checkbox" id="notifNearby" checked />
+            <span class="notif-toggle-slider"></span>
+            <div class="notif-toggle-info">
+              <span class="notif-toggle-label">Corriere vicino</span>
+              <span class="notif-toggle-desc">Quando il corriere si trova entro una certa distanza</span>
+            </div>
+          </label>
+          <div class="notif-threshold" id="thresholdNearby">
+            <label class="notif-threshold-label" for="nearbyKm">Distanza</label>
+            <div class="notif-threshold-input">
+              <input type="number" id="nearbyKm" min="0.1" max="50" step="0.1" value="1" />
+              <span class="notif-threshold-unit">km</span>
+            </div>
+          </div>
+          <label class="notif-toggle">
+            <input type="checkbox" id="notifFewStops" checked />
+            <span class="notif-toggle-slider"></span>
+            <div class="notif-toggle-info">
+              <span class="notif-toggle-label">Poche fermate</span>
+              <span class="notif-toggle-desc">Quando rimangono poche fermate prima della consegna</span>
+            </div>
+          </label>
+          <div class="notif-threshold" id="thresholdStops">
+            <label class="notif-threshold-label" for="fewStopsCount">Fermate</label>
+            <div class="notif-threshold-input">
+              <input type="number" id="fewStopsCount" min="1" max="20" step="1" value="3" />
+              <span class="notif-threshold-unit">o meno</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading state -->
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Caricamento dati di tracciamento...</p>
+      </div>
+
+      <!-- Error state -->
+      <div class="error-overlay" id="errorOverlay">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--pp-error)">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <p class="error-text" id="errorText">Errore</p>
+        <button class="btn-retry" id="btnRetry">Riprova</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="leaflet/leaflet.js"></script>
+  <script src="overlay.js"></script>
+</body>
+</html>
