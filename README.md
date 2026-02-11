@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/Chrome-88%2B-brightgreen?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Chrome 88+">
   <img src="https://img.shields.io/badge/Firefox-128%2B-FF7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white" alt="Firefox 128+">
   <img src="https://img.shields.io/badge/Licenza-Libera-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white" alt="Licenza Libera">
-  <img src="https://img.shields.io/badge/OSINT-Legale-success?style=for-the-badge&logo=shield&logoColor=white" alt="OSINT">
+  <img src="https://img.shields.io/badge/OSINT-Mood-success?style=for-the-badge&logo=shield&logoColor=white" alt="OSINT">
   <img src="https://img.shields.io/badge/Hacking%3F-Assolutamente%20NO-red?style=for-the-badge&logo=hackthebox&logoColor=white" alt="No Hacking">
   <img src="https://img.shields.io/badge/Privacy-100%25%20Locale-teal?style=for-the-badge&logo=tor&logoColor=white" alt="Privacy">
   <img src="https://img.shields.io/badge/%F0%9F%8D%96-Arrosticini%20Powered-orange?style=for-the-badge" alt="Arrosticini">
@@ -228,5 +228,5 @@ Italy, USA, UK, Germany, France, Spain, Japan, India, Australia, Canada, Brazil,
   <br>
   <em>If you find this project useful, buy me an arrosticino (or 100, because one is never enough)</em>
   <br><br>
-  &copy; 2025-2026 ParcelPulse by Loris Castorani
+  &copy; 2025-2026 ParcelPulse by il_laurice.exe
 </p>
